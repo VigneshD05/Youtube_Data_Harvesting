@@ -7,7 +7,6 @@ import streamlit as st
 #API key connection
 def Api_connect():
     Api_Id="AIzaSyA3T2nnb_7sbR1sBGjILP3sUmQ9nvql8s8"
-
     api_service_name = "youtube"
     api_version = "v3"
     youtube = build(api_service_name,api_version,developerKey=Api_Id)
@@ -65,7 +64,7 @@ def get_playlist_info(channel_id):
             next_page=False
     return All_data
 
-#All_data=get_playlist_info("UCvYI7HB4z9WjJ-s5zA6WaGg")
+
 
 #get video ids
 def get_channel_videos(channel_id):
@@ -90,7 +89,7 @@ def get_channel_videos(channel_id):
         if next_page_token is None:
             break
     return video_ids
-video_ids=get_channel_videos("UCvYI7HB4z9WjJ-s5zA6WaGg")
+
 
 
 #get video information
@@ -124,8 +123,7 @@ def get_video_info(video_ids):
             video_data.append(data)
     return video_data
 
-#video_data=get_video_info(video_ids)
-#print(video_data)
+
 
 #get comment information
 def get_comment_info(video_ids):
@@ -154,15 +152,13 @@ def get_comment_info(video_ids):
                 
         return Comment_Information
 
-Comment_Information=get_comment_info(video_ids)
-#print(Comment_Information)
+
 
 #MongoDB Connection
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["Youtube_data"]
 
 # upload to MongoDB
-
 def channel_details(channel_id):
     ch_details = get_channel_info(channel_id)
     pl_details = get_playlist_info(channel_id)
@@ -176,9 +172,7 @@ def channel_details(channel_id):
     
     return "upload completed successfully"
 
-print(channel_details);
 
-#insert=channel_details("UCvYI7HB4z9WjJ-s5zA6WaGg")
 
 #Table creation for channels, playlistes,videos,comments
 def channels_table():
@@ -297,7 +291,6 @@ def playlists_table():
            print("Playlists values are already inserted")
 
 def videos_table():
-
     mydb = psycopg2.connect(host="localhost",
                 user="postgres",
                 password="admin",
@@ -387,8 +380,7 @@ def videos_table():
         except:
             st.write("videos values already inserted in the table")
 
-def comments_table():
-    
+def comments_table(): 
     mydb = psycopg2.connect(host="localhost",
                 user="postgres",
                 password="admin",
